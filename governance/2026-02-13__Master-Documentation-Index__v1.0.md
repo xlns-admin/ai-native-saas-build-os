@@ -30,19 +30,19 @@ Primary integration guidance:
 ## 2. Canonical Doctrine
 
 ### 2.1 Build OS (Current Canonical Version)
-- `/doctrine/2026-02-08__AI-Native-SaaS-Build-OS__v2.3.md`
+- `/doctrine/artefacts/2026-02-08__AI-Native-SaaS-Build-OS__v2.3.md`
 
 ### 2.2 Doctrine Extensions
-- `/doctrine/2026-02-08__Enterprise-Hardening-Layer__v1.0.md`
-- `/doctrine/2026-02-08__Dual-Mode-Architecture__v1.1.md`
+- `/doctrine/artefacts/2026-02-08__Enterprise-Hardening-Layer__v1.0.md`
+- `/doctrine/artefacts/2026-02-08__Dual-Mode-Architecture__v1.1.md`
 
 ### 2.3 Mobile and Client-Side Doctrine
-- `/doctrine/2026-02-13__Mobile-Support-Policy__v1.0.md`
+- `/doctrine/artefacts/2026-02-13__Mobile-Support-Policy__v1.0.md`
 
 ### 2.4 MCP Doctrine
-- `/doctrine/2026-02-13__MCP-Architecture__v1.0.md`
-- `/doctrine/2026-02-13__MCP-Evolution-Roadmap__v1.0.md`
-- `/doctrine/2026-02-13__MCP-Maturity-Self-Assessment-Checklist__v1.0.md`
+- `/doctrine/artefacts/2026-02-13__MCP-Architecture__v1.0.md`
+- `/doctrine/artefacts/2026-02-13__MCP-Evolution-Roadmap__v1.0.md`
+- `/doctrine/artefacts/2026-02-13__MCP-Maturity-Self-Assessment-Checklist__v1.0.md`
 
 ### 2.5 Lifecycle Enforcement Doctrine
 - `/doctrine/enforcement/2026-02-08__Lifecycle-Enforcer__System-Prompt__v1.0.md`
