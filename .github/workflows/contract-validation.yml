@@ -1,0 +1,29 @@
+name: Validate Technical Architecture Contracts
+
+on:
+  pull_request:
+    paths:
+      - '**Technical-Architecture-Contract*.yaml'
+      - 'enforcement/**'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install pyyaml
+
+      - name: Run Contract Validator
+        run: |
+          python enforcement/runtime/2026-02-14__Contract-Validator-Runtime__v1.0.py \
+            --contract path/to/contract.yaml \
+            --rules enforcement/validators/2026-02-14__Technical-Architecture-Contract__Validator-Rules__v1.0.yaml
