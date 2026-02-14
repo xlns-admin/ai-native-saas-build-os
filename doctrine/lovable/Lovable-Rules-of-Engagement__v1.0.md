@@ -1,262 +1,355 @@
-# Lovable-Rules-of-Engagement__v1.0.md
+---
+Document ID: Lovable-Rules-of-Engagement__v1.0
+Owner: Build OS Maintainer
+Status: Approved
+Version: v1.0
+Review Cycle: Annual
+Classification: Internal Doctrine
+Supersedes: None
+Applies To: Any change implemented via Lovable in any governed product repository
+---
 
-AI-Native SaaS Build OS
-Lovable Build Discipline
+# Lovable Rules of Engagement
 
-Status: Canonical
-Applies to: Any change implemented via Lovable in any governed product repository.
+AI-Native SaaS Build OS  
+Lovable Implementation Discipline
 
 ---
 
 ## 1. Purpose
 
-This document defines the rules of engagement for using Lovable as an implementation agent.
+This document defines the mandatory rules for using Lovable as an implementation agent within governed product repositories.
 
 It exists to prevent:
-- technical debt accumulation through “quick fixes”,
-- schema drift and undocumented architectural changes,
-- inconsistent UI patterns and fragmented UX copy,
-- untested changes that regress silently,
-- documentation that falls behind the product.
 
-Lovable is treated as an execution unit, not a collaborator.
+- Technical debt accumulation through uncontrolled “quick fixes”
+- Schema drift and undocumented architectural change
+- Inconsistent UI patterns and fragmented UX behaviour
+- Untested changes that regress silently
+- Documentation lagging behind product reality
+
+Lovable operates as a deterministic implementation agent under human authority.  
+It does not own architectural decisions.
+
+---
+
+## 1.1 Non-Goals
+
+This document does not:
+
+- Replace architectural review processes
+- Define feature requirements
+- Replace CI enforcement
+- Override product contracts
+- Permit autonomous architectural evolution
+
+It governs execution discipline only.
 
 ---
 
 ## 2. Authority and Precedence
 
-When prompting Lovable, the following precedence order applies:
+When prompting Lovable, the following authority order applies:
 
-1. Product contracts in `/contracts/` (architecture, lifecycle, governance).
-2. OS doctrine files referenced explicitly in the prompt.
-3. Product-level ADRs in `/adr/`.
-4. Product requirements, procedures, and build manuals.
-5. Lovable output.
+1. Product contracts in `/contracts/`
+2. OS doctrine explicitly referenced
+3. Product ADRs in `/adr/`
+4. Product requirements and build manuals
+5. Lovable output
 
-If Lovable proposes a change that conflicts with an authoritative artefact, the change must be rejected or escalated via ADR.
+If Lovable proposes changes conflicting with higher authority artefacts, the change must be rejected or escalated via ADR.
 
 ---
 
-## 3. Non-Negotiable Build Contract
+## 3. Non-Negotiable Build Constraints
 
 Lovable must comply with the following constraints on every change:
 
-- TypeScript strict mode is mandatory.
-- No `any` in production code.
-- No architectural decisions without an ADR reference.
-- No schema changes without a schema migration artefact and updated contracts.
-- No security boundary changes without updating relevant policies and controls.
-- No release-impacting change without tests and a rollback verification checklist.
+- TypeScript strict mode enabled
+- No `any` in production code
+- No architectural decisions without ADR reference
+- No schema change without migration artefact and contract update
+- No security boundary modification without updating relevant policies
+- No release-impacting change without tests and rollback checklist
 
-If Lovable cannot comply, it must halt and request the missing inputs.
+If compliance is impossible, Lovable must halt and request missing inputs.
 
 ---
 
-## 4. Code Quality Standard (Anti-Debt)
+## 4. Code Quality and Anti-Debt Standard
 
 ### 4.1 TypeScript Discipline
-- TypeScript must be used consistently across the codebase.
-- `strict: true` must remain enabled.
-- `any` is not permitted.
-- Use `unknown` and narrow types explicitly.
-- Prefer discriminated unions for state machines and conditional flows.
-- Prefer typed API clients and typed DTOs at boundaries.
+
+- `strict: true` must remain enabled
+- `any` is prohibited
+- Use `unknown` and narrow explicitly
+- Prefer discriminated unions for conditional flows
+- Enforce typed DTOs at system boundaries
+
+Type weakening to “make it compile” is forbidden.
+
+---
 
 ### 4.2 React Discipline
-- Functional components only.
-- Hooks only.
-- No component should exceed a reasonable complexity threshold. Split by responsibility.
-- Business logic must not live inside UI components.
-- Side-effects must be isolated (effects should be thin, predictable, and dependency-safe).
-- Avoid prop drilling where it creates brittleness, prefer explicit state boundaries.
+
+- Functional components only
+- Hooks only
+- Components must remain single-responsibility
+- Business logic must not reside inside UI components
+- Effects must be thin, predictable, and dependency-safe
+- Avoid unnecessary prop drilling; define explicit state boundaries
+
+---
 
 ### 4.3 Separation of Concerns
-The following structure is mandatory:
 
-- UI components: rendering, layout, interaction.
-- Domain logic: pure functions, deterministic behaviour, no UI dependencies.
-- Data access: API calls, DB queries, adapters.
-- State orchestration: predictable state transitions, explicit error handling.
+Mandatory structure:
+
+- UI Layer — rendering and interaction only
+- Domain Layer — pure deterministic functions
+- Data Layer — adapters and integration calls
+- State Orchestration — explicit state transitions and error handling
 
 Rule:
-If logic can be unit tested without a browser, it should live outside UI components.
 
-### 4.4 Dependency and Upgrade Safety
-- Prefer stable, widely adopted libraries.
-- Avoid introducing new dependencies for trivial gains.
-- If a new dependency is introduced, include:
-  - rationale,
-  - maintenance risk,
-  - removal plan.
-
-Lovable must not “solve” problems by adding packages without explicit approval.
+If logic can be unit tested without a browser, it must not live inside UI components.
 
 ---
 
-## 5. Comment and Documentation Policy
+### 4.4 Dependency Discipline
 
-Comments are allowed only when they add survivable knowledge.
+- Prefer stable, widely adopted libraries
+- Avoid adding dependencies for trivial utility
+- Every new dependency must include:
+  - Rationale
+  - Maintenance risk
+  - Removal strategy
 
-Allowed comment types:
-- Decision comments: why this approach, with ADR reference if relevant.
-- Invariants: what must remain true.
-- Security notes: assumptions, boundaries, data classification constraints.
-- Non-obvious behaviour: edge cases that are easy to break.
+Lovable must not introduce packages without explicit approval.
+
+---
+
+## 5. Documentation and Comment Policy
+
+Comments are permitted only when they add survivable knowledge.
+
+Allowed:
+
+- Decision comments referencing ADRs
+- Invariants that must remain true
+- Security boundary notes
+- Non-obvious edge-case behaviour
 
 Not allowed:
-- Narrative comments that repeat the code.
-- “Temporary” comments without a tracked issue.
-- Comments that contain speculative advice.
 
-Docstrings:
-- Required for public interfaces, shared utilities, and boundary adapters.
+- Comments that repeat obvious code
+- “Temporary” comments without tracked issue
+- Speculative commentary
+
+Public interfaces and shared utilities require docstrings.
 
 ---
 
-## 6. UI Guidance, Tooltips, and User Help
+## 6. UI Guidance and Tooltip Governance
 
-Tooltips and guides must be produced only when triggered.
+Tooltips and guides are produced only when triggered.
 
 Trigger conditions:
-- A new user workflow is introduced.
-- A workflow changes in a way that could confuse an existing user.
-- A new concept is introduced that requires definition.
 
-When triggered, Lovable must output:
-- tooltip copy for touched screens,
-- help text or short guide snippets,
-- any required microcopy updates.
+- New user workflow introduced
+- Existing workflow materially changed
+- New recurring concept introduced
+
+When triggered, Lovable must generate:
+
+- Tooltip copy
+- Help text snippet
+- Updated UI microcopy where applicable
 
 Storage rule:
-- Tooltip copy must live in a central UI copy file, not embedded randomly in components.
-- Help/guide content must live in `/docs/help/` or the product’s chosen canonical docs path.
 
-No tooltip sprawl:
-If a tooltip is created, it must have:
-- a purpose,
-- a target user moment,
-- a deprecation rule if the UI becomes self-evident later.
+- Tooltip copy must live in a central UI copy file
+- Help content must live in canonical documentation path
+
+No tooltip may exist without defined user purpose.
 
 ---
 
-## 7. Testing Policy (Mandatory Outputs)
+## 7. Testing Policy
 
-For every change, Lovable must propose tests using the following structure:
+Testing artefacts are mandatory outputs.
 
 ### 7.1 Automated Tests
+
 Required where applicable:
-- domain logic unit tests,
-- permission and boundary tests (especially RLS-related behaviour),
-- integration tests for key flows where deterministic.
+
+- Domain logic unit tests
+- Permission and boundary tests
+- Deterministic integration tests
+
+---
 
 ### 7.2 Manual Test Script
+
 Required when:
-- UI workflows change,
-- external integrations exist,
-- multi-step journeys exist,
-- payments, messaging, onboarding, or admin actions are touched.
+
+- UI workflows change
+- External integrations exist
+- Multi-step journeys exist
+- Payments, messaging, onboarding, or admin flows are modified
 
 Manual script must include:
-- happy path,
-- top 5 edge cases,
-- failure path,
-- expected UI states,
-- data verification steps.
+
+- Happy path
+- Top 5 edge cases
+- Failure path
+- Expected UI states
+- Data validation checks
+
+---
 
 ### 7.3 Release Verification Checklist
-For release-impacting changes, include:
-- smoke checks,
-- monitoring expectations,
-- rollback verification steps,
-- “known risk” notes.
+
+For release-impacting changes include:
+
+- Smoke checks
+- Monitoring expectations
+- Rollback verification steps
+- Known risk summary
 
 ---
 
-## 8. Output Format Requirements (Diff First)
+## 8. Output Requirements (Diff-First Discipline)
 
-Lovable outputs must be reviewable as changes, not as prose.
+Lovable outputs must be reviewable as changes, not prose.
 
-Minimum output requirement:
-- a clear list of files changed,
-- a summary of what changed and why,
-- explicit notes on:
-  - schema changes,
-  - dependency changes,
-  - security boundary changes,
-  - test additions or missing tests.
+Minimum output:
 
-If the project uses a Diff Spec document, Lovable must comply with it.
+- Files changed
+- What changed
+- Why changed
+- Risk notes
+- Schema impact statement
+- Dependency impact statement
+- Security boundary impact statement
+- Test coverage summary
 
----
-
-## 9. Upgrade Discipline (Reducing Future React Debt)
-
-Lovable must be prompted to avoid “version upgrade nightmares” by enforcing:
-
-- tight typing,
-- small composable components,
-- business logic extracted to pure modules,
-- minimal dependency surface area,
-- tests that express behaviour, not implementation details.
-
-When upgrading dependencies:
-- apply changes incrementally,
-- run tests after each step,
-- record breaking changes.
-
-If errors occur:
-- Lovable must fix errors without weakening typing or removing constraints.
+If a Diff Spec exists, it must be followed.
 
 ---
 
-## 10. Lovable Prompt Header (Copy/Paste)
+## 9. Upgrade Discipline
 
-Use this header at the start of every Lovable epic prompt.
+To prevent future React or dependency debt:
 
-### 10.1 Mandatory Prompt Header
-Paste this verbatim, then add your feature requirements below.
+- Keep components small and composable
+- Extract business logic to pure modules
+- Minimise dependency surface area
+- Write behavioural tests, not implementation tests
+
+During upgrades:
+
+- Apply changes incrementally
+- Run tests after each change
+- Record breaking changes
+- Never weaken typing to satisfy compiler
 
 ---
+
+## 10. Mandatory Lovable Prompt Header
+
+The following header must precede every Lovable epic or implementation prompt.
+
+Failure to include this header constitutes a governance breach.
+
+---
+
+### 10.1 Required Prompt Header (Copy Verbatim)
+
 You are implementing changes in this repository under governed Build OS discipline.
 
 You must comply with:
-- `/doctrine/lovable/Lovable-Rules-of-Engagement__v1.0.md`
-- Any applicable contracts in `/contracts/`
-- Any relevant ADRs in `/adr/`
+- /doctrine/lovable/Lovable-Rules-of-Engagement__v1.0.md
+- Applicable contracts in /contracts/
+- Relevant ADRs in /adr/
 
 Non-negotiables:
-- TypeScript strict mode.
-- No `any`.
-- No architectural decisions without ADR reference.
-- No schema changes without migration artefact and contract updates.
-- Provide a diff-style output: files changed, what changed, why, risks, tests.
+- TypeScript strict mode enabled
+- No `any`
+- No architectural decisions without ADR reference
+- No schema changes without migration artefact and contract update
+- Provide diff-style output (files changed, what changed, why, risks, tests)
 
-For this task:
-1. Restate the objective as a one-sentence outcome.
+Execution Requirements:
+1. Restate objective as a one-sentence outcome.
 2. List assumptions and constraints.
 3. Propose the smallest clean change that satisfies the objective.
 4. Generate code changes.
-5. Generate tests (automated where applicable).
-6. Generate manual test script if this touches UI workflows or integrations.
-7. Output a release verification checklist if release-impacting.
----
+5. Generate automated tests where applicable.
+6. Generate manual test script if UI workflows or integrations are affected.
+7. Provide a release verification checklist if the change is release-impacting.
+8. Also apply Section 3 (Build Contract) and Sections 4–8 (Quality, Docs, UI help, Testing, Output).
 
 ---
 
-## 11. Definition Discipline for UI Concepts
+### 10.2 Enforcement Note
 
-If the change introduces a concept intended to recur in the product UI, Lovable must include exactly one glossary-ready definition sentence, stored in the product’s canonical glossary location.
+Prompts that omit required constraints may result in:
+- Type weakening
+- Undocumented schema changes
+- Architectural drift
+- Incomplete test coverage
+
+The header exists to prevent silent degradation of code quality and governance integrity.
+
+It is mandatory.
 
 ---
 
-## 12. Compliance with This Document
+### 10.3 Mandatory Build Constraints (Include When Applicable)
 
-If Lovable cannot comply with any rule, it must:
-- state which rule blocks execution,
-- request the missing input,
-- halt rather than guessing.
+Include the following constraints in the prompt when relevant to the change:
 
-This is deliberate.
+Code quality constraints:
+- TypeScript strict only. No `any`.
+- Keep UI components thin. Extract domain logic into pure functions in `/src/domain` or `/src/utils`.
+- No new dependencies without explicit approval. If proposing one, include rationale, risk, and removal plan.
+- Add tests. At minimum, unit tests for domain logic. If a UI flow changes, include a manual test script.
+- If permissions are touched, include explicit RLS/policy verification steps.
+- Output changes as a diff summary: files changed, what changed, why, risks, tests added.
+---
+
+## 11. Enforcement
+
+Compliance is mandatory.
+
+Violations include:
+
+- Direct architectural modification without ADR
+- Schema mutation without contract update
+- Type weakening
+- Missing required test artefacts
+- Unapproved dependency introduction
+
+Violations result in:
+
+- PR rejection
+- Reversion of change
+- Escalation under Escalation Matrix
+
+Lovable must halt when blocked rather than guess.
+
+---
+
+## 12. Summary
+
+Lovable is an execution unit.
+
+Architecture is human-owned.
+Contracts are authoritative.
+Tests are mandatory.
+Documentation is first-class.
+Velocity follows discipline.
 
 ---
 
