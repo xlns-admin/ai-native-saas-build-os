@@ -42,7 +42,7 @@ build_os:
   contract_version: "v1.2"
 
 Failure to declare OS version is a governance breach.
-
+```
 ---
 
 ## 3. Contract Instantiation Flow
