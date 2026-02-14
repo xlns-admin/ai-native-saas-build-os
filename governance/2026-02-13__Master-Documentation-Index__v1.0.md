@@ -46,6 +46,7 @@ Primary integration guidance:
 
 ### 2.5 Lifecycle Enforcement Doctrine
 - `/doctrine/enforcement/2026-02-08__Lifecycle-Enforcer__System-Prompt__v1.0.md`
+- `/enforcement/checklists/2026-02-08__Lifecycle-Enforcer__Checklist-View__v1.0.md`
 
 ---
 
