@@ -1,4 +1,4 @@
-2026-02-13__Build-OS-Governance-Charter__v1.0.md
+Build-OS-Governance-Charter__v1.0.md
 
 Build OS Governance Charter
 
@@ -92,7 +92,7 @@ Platform repositories must remain traceable to the Build OS lifecycle stages.
 
 File naming within structured repositories follows:
 
-YYYY-MM-DD__Artefact-Name__vX.Y.ext
+Artefact-Name__vX.Y.ext
 
 Rules:
 	•	No redundant product prefixes inside structured repos.
@@ -102,7 +102,7 @@ Rules:
 
 Example:
 
-2026-02-13__Threat-Model__v1.0.md
+Threat-Model__v1.0.md
 
 Folder structure provides context.
 Filenames provide identity and version.
