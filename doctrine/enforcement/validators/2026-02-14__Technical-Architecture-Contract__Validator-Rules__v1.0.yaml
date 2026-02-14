@@ -1,0 +1,388 @@
+# 2026-02-14__Technical-Architecture-Contract__Validator-Rules__v1.0.yaml
+# Machine-readable validator rules for Technical Architecture Contract (TAC).
+# Intended use: consumed by a lightweight validator script (Node/Python) in GitHub Actions.
+# Design goals: strict, deterministic, minimal ambiguity.
+
+meta:
+  artefact: "Technical-Architecture-Contract"
+  rules_version: "1.0"
+  owner: "ai-native-saas-build-os"
+  severity_levels: ["INFO", "WARN", "ERROR"]
+  default_severity: "ERROR"
+
+validation:
+  mode: "strict"
+  # If true, any keys not declared in schema.required_sections or schema.allowed_top_level_keys will fail.
+  forbid_unknown_top_level_keys: true
+  # If true, missing required paths fail.
+  require_all_paths: true
+
+schema:
+  # Top-level keys that MUST exist in the contract.
+  required_sections:
+    - contract_metadata
+    - product
+    - infrastructure
+    - database
+    - compute
+    - queue
+    - logging
+    - backups
+    - authentication
+    - authorization
+    - encryption
+    - secrets_management
+    - multi_tenancy
+    - monitoring
+    - incident_response
+    - vulnerability_management
+    - data_processing
+    - auditability
+    - ci_cd
+    - design_principles
+    - approval
+
+  # If forbid_unknown_top_level_keys is true, only these top-level keys are allowed.
+  allowed_top_level_keys:
+    - contract_metadata
+    - product
+    - infrastructure
+    - database
+    - compute
+    - queue
+    - logging
+    - backups
+    - authentication
+    - authorization
+    - encryption
+    - secrets_management
+    - multi_tenancy
+    - monitoring
+    - incident_response
+    - vulnerability_management
+    - data_processing
+    - auditability
+    - ci_cd
+    - design_principles
+    - approval
+    - deviations
+
+  # Required scalar types for critical fields (basic type checks).
+  # Supported: string, boolean, integer, number, array, object
+  required_types:
+    contract_metadata.contract_version: string
+    contract_metadata.contract_type: string
+    contract_metadata.governed_by_build_os_version: string
+    contract_metadata.status: string
+    contract_metadata.last_reviewed: string
+    contract_metadata.review_cycle_days: integer
+    contract_metadata.next_review_due: string
+
+    product.name: string
+    product.environment: string
+    product.owner: string
+
+    database.rls_enabled: boolean
+    database.rls_mandatory_for_production: boolean
+
+    authentication.mfa_required_for_admins: boolean
+
+    logging.immutable_audit_logs: boolean
+
+    ci_cd.branch_protection_enabled: boolean
+    ci_cd.mandatory_pr_reviews: boolean
+    ci_cd.rollback_strategy_defined: boolean
+
+    backups.tested_restore: boolean
+
+    multi_tenancy.enabled: boolean
+    multi_tenancy.cross_tenant_access_allowed: boolean
+
+rules:
+  # ---------------------------
+  # 1) Basic schema + type rules
+  # ---------------------------
+
+  - id: "TAC-001"
+    title: "Required sections present"
+    severity: "ERROR"
+    type: "presence"
+    paths: ${schema.required_sections}
+
+  - id: "TAC-002"
+    title: "No unknown top-level keys"
+    severity: "ERROR"
+    type: "unknown_keys"
+    scope: "top_level"
+    allowed_keys: ${schema.allowed_top_level_keys}
+    enabled_if:
+      equals:
+        - path: "validation.forbid_unknown_top_level_keys"
+          value: true
+
+  - id: "TAC-003"
+    title: "Required types for critical fields"
+    severity: "ERROR"
+    type: "type_check"
+    checks: ${schema.required_types}
+
+  # ---------------------------
+  # 2) Enumerations
+  # ---------------------------
+
+  - id: "TAC-010"
+    title: "Environment enum is valid"
+    severity: "ERROR"
+    type: "enum"
+    path: "product.environment"
+    allowed: ["development", "staging", "production"]
+
+  - id: "TAC-011"
+    title: "Contract status enum is valid"
+    severity: "ERROR"
+    type: "enum"
+    path: "contract_metadata.status"
+    allowed: ["draft", "review", "approved", "deprecated"]
+
+  - id: "TAC-012"
+    title: "Multi-tenancy isolation model enum is valid when enabled"
+    severity: "ERROR"
+    type: "enum"
+    path: "multi_tenancy.isolation_model"
+    allowed: ["ROW_LEVEL", "SCHEMA_LEVEL", "DATABASE_LEVEL"]
+    enabled_if:
+      equals:
+        - path: "multi_tenancy.enabled"
+          value: true
+
+  # ---------------------------
+  # 3) Production gating invariants
+  # ---------------------------
+
+  - id: "TAC-100"
+    title: "Production requires RLS enabled"
+    severity: "ERROR"
+    type: "assert"
+    assert:
+      equals:
+        - path: "database.rls_enabled"
+          value: true
+    enabled_if:
+      equals:
+        - path: "product.environment"
+          value: "production"
+
+  - id: "TAC-101"
+    title: "Production requires RLS mandatory flag set"
+    severity: "ERROR"
+    type: "assert"
+    assert:
+      equals:
+        - path: "database.rls_mandatory_for_production"
+          value: true
+    enabled_if:
+      equals:
+        - path: "product.environment"
+          value: "production"
+
+  - id: "TAC-102"
+    title: "Production requires MFA for admins"
+    severity: "ERROR"
+    type: "assert"
+    assert:
+      equals:
+        - path: "authentication.mfa_required_for_admins"
+          value: true
+    enabled_if:
+      equals:
+        - path: "product.environment"
+          value: "production"
+
+  - id: "TAC-103"
+    title: "Production requires immutable audit logs"
+    severity: "ERROR"
+    type: "assert"
+    assert:
+      equals:
+        - path: "logging.immutable_audit_logs"
+          value: true
+    enabled_if:
+      equals:
+        - path: "product.environment"
+          value: "production"
+
+  - id: "TAC-104"
+    title: "Production requires branch protection enabled"
+    severity: "ERROR"
+    type: "assert"
+    assert:
+      equals:
+        - path: "ci_cd.branch_protection_enabled"
+          value: true
+    enabled_if:
+      equals:
+        - path: "product.environment"
+          value: "production"
+
+  - id: "TAC-105"
+    title: "Production requires mandatory PR reviews"
+    severity: "ERROR"
+    type: "assert"
+    assert:
+      equals:
+        - path: "ci_cd.mandatory_pr_reviews"
+          value: true
+    enabled_if:
+      equals:
+        - path: "product.environment"
+          value: "production"
+
+  - id: "TAC-106"
+    title: "Production requires rollback strategy defined"
+    severity: "ERROR"
+    type: "assert"
+    assert:
+      equals:
+        - path: "ci_cd.rollback_strategy_defined"
+          value: true
+    enabled_if:
+      equals:
+        - path: "product.environment"
+          value: "production"
+
+  # Backups gate: either tested_restore=true OR an approved deviation with ADR references.
+  - id: "TAC-107"
+    title: "Production requires tested restore OR deviation+ADR"
+    severity: "ERROR"
+    type: "assert_any"
+    any_of:
+      - equals:
+          - path: "backups.tested_restore"
+            value: true
+      - all_of:
+          - equals:
+              - path: "deviations.declared"
+                value: true
+          - not_empty:
+              path: "deviations.adr_references"
+    enabled_if:
+      equals:
+        - path: "product.environment"
+          value: "production"
+
+  # ---------------------------
+  # 4) Multi-tenancy invariants
+  # ---------------------------
+
+  - id: "TAC-200"
+    title: "Multi-tenancy forbids cross-tenant access"
+    severity: "ERROR"
+    type: "assert"
+    assert:
+      equals:
+        - path: "multi_tenancy.cross_tenant_access_allowed"
+          value: false
+    enabled_if:
+      equals:
+        - path: "multi_tenancy.enabled"
+          value: true
+
+  - id: "TAC-201"
+    title: "Multi-tenancy requires tenant_id enforcement at DB and API"
+    severity: "ERROR"
+    type: "contains_all"
+    path: "multi_tenancy.tenant_id_enforced_at"
+    required_values: ["database", "api"]
+    enabled_if:
+      equals:
+        - path: "multi_tenancy.enabled"
+          value: true
+
+  - id: "TAC-202"
+    title: "Multi-tenancy requires tenant data classification policy reference"
+    severity: "ERROR"
+    type: "not_empty"
+    path: "multi_tenancy.tenant_data_classification_policy"
+    enabled_if:
+      equals:
+        - path: "multi_tenancy.enabled"
+          value: true
+
+  # ---------------------------
+  # 5) Security linkage / references must exist
+  # ---------------------------
+
+  - id: "TAC-300"
+    title: "Key management policy reference required"
+    severity: "ERROR"
+    type: "not_empty"
+    path: "encryption.key_management_policy_reference"
+
+  - id: "TAC-301"
+    title: "Threat model reference required"
+    severity: "ERROR"
+    type: "not_empty"
+    path: "auditability.threat_model_reference"
+
+  - id: "TAC-302"
+    title: "Access control matrix reference required"
+    severity: "ERROR"
+    type: "not_empty"
+    path: "auditability.access_control_matrix_reference"
+
+  - id: "TAC-303"
+    title: "Change management protocol reference required"
+    severity: "ERROR"
+    type: "not_empty"
+    path: "auditability.change_management_protocol_reference"
+
+  # ---------------------------
+  # 6) Review-cycle discipline
+  # ---------------------------
+
+  - id: "TAC-400"
+    title: "Review cycle days must be positive"
+    severity: "ERROR"
+    type: "assert"
+    assert:
+      greater_than:
+        - path: "contract_metadata.review_cycle_days"
+          value: 0
+
+  # next_review_due must not be later than last_reviewed + review_cycle_days
+  # Note: this requires the validator implementation to support date arithmetic.
+  - id: "TAC-401"
+    title: "next_review_due must be within review cycle"
+    severity: "ERROR"
+    type: "date_within_days"
+    last_date_path: "contract_metadata.last_reviewed"
+    next_date_path: "contract_metadata.next_review_due"
+    max_days_path: "contract_metadata.review_cycle_days"
+
+  # ---------------------------
+  # 7) Approval discipline
+  # ---------------------------
+
+  - id: "TAC-500"
+    title: "Approved status requires approval fields"
+    severity: "ERROR"
+    type: "all_required"
+    paths:
+      - approval.approved_by
+      - approval.approval_date
+      - approval.approval_method
+    enabled_if:
+      equals:
+        - path: "contract_metadata.status"
+          value: "approved"
+
+  # If deviations declared, ADR references must exist (especially when approved).
+  - id: "TAC-501"
+    title: "Deviations declared requires ADR references"
+    severity: "ERROR"
+    type: "not_empty"
+    path: "deviations.adr_references"
+    enabled_if:
+      equals:
+        - path: "deviations.declared"
+          value: true
