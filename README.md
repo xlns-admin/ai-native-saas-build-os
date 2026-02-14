@@ -1,45 +1,95 @@
-# ai-native-saas-build-os
-Canonical lifecycle, governance, and enforcement doctrine for AI-native SaaS builds. Defines stage contracts, artefact requirements, and enterprise hardening standards. Authoritative source of build governance.
-
 # AI-Native SaaS Build OS
 
-## Purpose
+Canonical doctrine and enforcement framework for AI-assisted SaaS product builds.
 
-This repository is the canonical governance layer for AI-assisted SaaS builds.
+This repository defines the mandatory lifecycle, governance artefacts, architectural contracts, and validation logic required for building compliant, auditable, and enterprise-grade AI-native systems.
 
-It defines:
-
-- Lifecycle stages
-- Artefact requirements
-- Enforcement contracts
-- Escalation tiers
-- Enterprise hardening extensions
-
-Product repositories inherit from this OS. They do not modify it.
+---
 
 ## Authority Model
 
-This repository is the single source of truth for:
+This repository is the **source of truth** for:
 
+- Lifecycle stages and enforcement rules
+- Canonical artefact templates
+- Technical architecture contract schema
+- Validation and CI enforcement logic
+- Enterprise hardening controls
+
+Product repositories inherit from this OS.
+They do not redefine it.
+
+---
+
+## Repository Structure
+
+| Folder | Purpose |
+|--------|---------|
+| `/templates/` | Canonical artefact templates used by products |
+| `/contracts/` | Binding contract specifications |
+| `/enforcement/` | Validator rules, runtime, CI integration |
+| `/doctrine/` | Governance doctrine and lifecycle definitions |
+| `/changelog/` | Version history of the Build OS |
+
+---
+
+## Product Inheritance Rules
+
+All product repositories must:
+
+- Declare the Build OS version used
+- Instantiate contracts from `/templates/`
+- Store instantiated contracts locally
+- Pass validation using OS enforcement rules
+- Declare deviations via ADR
+- Never modify OS templates directly
+
+The OS is extended via versioned change control, not local mutation.
+
+---
+
+## Versioning Policy
+
+- **Major** → Structural lifecycle or contract change
+- **Minor** → New artefact or enforcement addition
+- **Patch** → Clarifications or non-breaking refinements
+
+Every change requires:
+- Pull Request review
+- Version increment
+- Changelog entry
+- Backward compatibility note
+
+---
+
+## Enforcement Model
+
+All Technical Architecture Contracts must:
+
+- Conform to validator rule schema
+- Pass runtime validation
+- Pass CI enforcement gate
+
+Failure blocks merge.
+
+---
+
+## Scope
+
+This OS governs:
 - Lifecycle discipline
-- Artefact naming conventions
-- Governance escalation rules
-- Machine-readable lifecycle contracts
+- Architecture contracts
+- Security controls
+- Compliance mapping
+- AI usage boundaries
 
-Products must reference the OS version they inherit from.
+It does not contain product code.
 
-## Versioning
+---
 
-- Major: Structural lifecycle change
-- Minor: New artefact or new section
-- Patch: Wording clarification
+## Ownership
 
-## Enforcement
+Build OS Owner: `<NAMED_AUTHORITY>`
+Change approval requires documented review.
 
-Lifecycle enforcement may be implemented via:
-
-- AI agents (Lifecycle Enforcer)
-- CI validation pipelines
-- Repository scanning
-
-This repository defines the contract.
+---
