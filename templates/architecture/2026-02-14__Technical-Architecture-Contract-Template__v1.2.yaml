@@ -1,0 +1,222 @@
+contract_metadata:
+  contract_version: "1.2"
+  contract_type: "Technical-Architecture-Contract"
+  template: true
+  template_version: "1.2"
+  governed_by_build_os_version: "<BUILD_OS_VERSION>"
+  contract_id: "<CONTRACT_ID>"
+  schema_version: "<SCHEMA_VERSION>"
+  status: "draft" # draft | approved | deprecated
+  review_cycle_days: 90
+  last_reviewed: "<YYYY-MM-DD>"
+  next_review_due: "<YYYY-MM-DD>"
+
+product:
+  name: "<PRODUCT_NAME>"
+  repository: "<PRODUCT_REPO_URL>"
+  environment: "<ENVIRONMENT>" # development | staging | production
+  owner: "<HUMAN_ORCHESTRATOR>"
+  escalation_contact: "<SECURITY_OR_TECH_LEAD>"
+
+# --------------------------------------------------------
+# 1. Infrastructure Core
+# --------------------------------------------------------
+
+infrastructure:
+  primary_cloud_provider: "<CLOUD_PROVIDER>"
+  primary_region: "<PRIMARY_REGION>"
+  multi_region_enabled: false
+
+database:
+  engine: "PostgreSQL"
+  managed_by: "<DB_PROVIDER>"
+  rls_enabled: true
+  rls_mandatory_for_production: true
+  backup_enabled: true
+  backup_frequency: "<DAILY|HOURLY|CUSTOM>"
+  point_in_time_recovery_enabled: true
+
+compute:
+  frontend_runtime: "<FRONTEND_RUNTIME>"
+  backend_runtime: "<BACKEND_RUNTIME>"
+  serverless: true
+  containerized: false
+
+queue:
+  engine: "<QUEUE_ENGINE>"
+  backend: "<QUEUE_BACKEND>"
+  dead_letter_queue_enabled: true
+  retry_policy:
+    max_attempts: 5
+    backoff_strategy: "exponential"
+
+logging:
+  detailed_retention_days: 14
+  audit_retention_days: 30
+  centralized_logging: true
+  immutable_audit_logs: true
+
+backups:
+  provider: "<BACKUP_PROVIDER>"
+  cross_region_backup: false
+  encrypted_at_rest: true
+  encrypted_in_transit: true
+  tested_restore: false
+  last_restore_test_date: "<YYYY-MM-DD>"
+
+# --------------------------------------------------------
+# 2. Security Controls
+# --------------------------------------------------------
+
+authentication:
+  provider: "<AUTH_PROVIDER>"
+  jwt_based_sessions: true
+  oauth_enabled: true
+  mfa_required_for_admins: true
+
+authorization:
+  rbac_enabled: true
+  least_privilege_enforced: true
+  service_account_separation: true
+
+encryption:
+  at_rest: true
+  in_transit: true
+  key_management_policy_reference: "<KEY_POLICY_DOC_PATH>"
+  key_rotation_interval_days: 90
+
+secrets_management:
+  provider: "<SECRETS_PROVIDER>"
+  secrets_rotation_policy: true
+  human_credentials_separated: true
+
+bot_protection:
+  enabled: true
+  provider: "<BOT_PROTECTION_PROVIDER>"
+
+# --------------------------------------------------------
+# 3. Multi-Tenancy Controls
+# --------------------------------------------------------
+
+multi_tenancy:
+  enabled: true
+  isolation_model: "<ROW_LEVEL|SCHEMA_LEVEL|DATABASE_LEVEL>"
+  tenant_id_enforced_at:
+    - database
+    - api
+  cross_tenant_access_allowed: false
+  tenant_data_classification_policy: "<POLICY_DOC_PATH>"
+
+# --------------------------------------------------------
+# 4. Observability & Operational Controls
+# --------------------------------------------------------
+
+monitoring:
+  error_tracking: "<ERROR_TRACKING_TOOL>"
+  uptime_monitoring: "<UPTIME_TOOL>"
+  metrics_dashboard: "<BI_TOOL>"
+  sla_defined: true
+  slo_defined: true
+
+incident_response:
+  playbook_reference: "<INCIDENT_PLAYBOOK_PATH>"
+  mean_time_to_detect_target_minutes: 15
+  mean_time_to_recover_target_minutes: 60
+
+vulnerability_management:
+  policy_reference: "<VULNERABILITY_POLICY_PATH>"
+  automated_dependency_scanning: true
+  container_scanning: false
+  remediation_sla_days:
+    critical: 7
+    high: 14
+    medium: 30
+    low: 90
+
+# --------------------------------------------------------
+# 5. Compliance & Data Governance
+# --------------------------------------------------------
+
+data_processing:
+  data_processing_register_reference: "<DPR_PATH>"
+  sub_processor_register_reference: "<SUBPROCESSOR_PATH>"
+  data_retention_policy_reference: "<RETENTION_POLICY_PATH>"
+
+compliance_frameworks:
+  soc2_alignment: false
+  iso27001_alignment: false
+  gdpr_applicable: true
+  hipaa_applicable: false
+
+auditability:
+  change_management_reference: "<CHANGE_MANAGEMENT_PATH>"
+  access_control_matrix_reference: "<ACM_PATH>"
+  threat_model_reference: "<THREAT_MODEL_PATH>"
+
+# --------------------------------------------------------
+# 6. AI & MCP Controls
+# --------------------------------------------------------
+
+ai_usage:
+  ai_enabled: false
+  secure_ai_usage_policy_reference: "<AI_POLICY_PATH>"
+  ai_risk_register_reference: "<AI_RISK_REGISTER_PATH>"
+  model_evaluation_protocol_reference: "<MODEL_EVAL_PROTOCOL_PATH>"
+
+mcp:
+  enabled: false
+  version: "<MCP_VERSION>"
+  orchestration_layer: "<MCP_RUNTIME>"
+  isolation_boundary_enforced: true
+  audit_trace_enabled: true
+
+# --------------------------------------------------------
+# 7. Mobile & Client Applications
+# --------------------------------------------------------
+
+mobile_support:
+  supported: false
+  platforms:
+    ios: false
+    android: false
+  minimum_supported_versions:
+    ios: "<MIN_IOS_VERSION>"
+    android: "<MIN_ANDROID_VERSION>"
+  client_application_security_addendum_reference: "<CASA_PATH>"
+  mobile_release_policy_reference: "<MRCP_PATH>"
+
+# --------------------------------------------------------
+# 8. Deployment & CI/CD
+# --------------------------------------------------------
+
+ci_cd:
+  provider: "<CI_PROVIDER>"
+  branch_protection_enabled: true
+  mandatory_pr_reviews: true
+  automated_tests_required: true
+  deployment_strategy: "<BLUE_GREEN|CANARY|ROLLING>"
+  rollback_strategy_defined: true
+
+# --------------------------------------------------------
+# 9. Architectural Principles (Non-Negotiables)
+# --------------------------------------------------------
+
+design_principles:
+  databases_are_permanent: true
+  providers_are_replaceable: true
+  workflows_are_declarative: true
+  execution_is_queued: true
+  framework_logic_decoupled_from_business_logic: true
+
+# --------------------------------------------------------
+# 10. Deviations & ADR Links
+# --------------------------------------------------------
+
+deviations:
+  declared: false
+  adr_references: []
+
+approval:
+  approved_by: "<APPROVER_NAME>"
+  approval_date: "<YYYY-MM-DD>"
+  signature_required: true
