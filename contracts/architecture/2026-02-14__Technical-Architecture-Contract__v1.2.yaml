@@ -1,0 +1,169 @@
+contract_version: 1.2
+contract_type: Technical-Architecture-Contract
+governed_by_build_os_version: "v2.3"
+
+product:
+  name: "<PRODUCT_NAME>"
+  environment: "production"
+  owner: "<HUMAN_ORCHESTRATOR>"
+
+# ---------------------------------------------------------
+# 1. Infrastructure Core
+# ---------------------------------------------------------
+
+infrastructure:
+  primary_cloud_provider: "AWS"
+  primary_region: "us-east-1"
+  database:
+    engine: "PostgreSQL"
+    managed_by: "Supabase"
+    rls_enabled: true
+    rls_mandatory_for_production: true
+  compute:
+    frontend: "Lovable Runtime / Static Edge"
+    backend: "Supabase Edge Functions (Deno)"
+  queue:
+    engine: "BullMQ"
+    backend: "Redis (Upstash)"
+  logging:
+    detailed_retention_days: 14
+    audit_retention_days: 30
+  backups:
+    provider: "Supabase + Hetzner"
+    tested_restore: false
+
+# ---------------------------------------------------------
+# 2. Identity & Access
+# ---------------------------------------------------------
+
+identity:
+  auth_provider: "Supabase Auth"
+  oauth_enabled: ["Google", "GitHub"]
+  jwt_required: true
+  mfa_required_for_admins: true
+
+# ---------------------------------------------------------
+# 3. MCP Integration
+# ---------------------------------------------------------
+
+mcp:
+  enabled: false
+  version: null
+  authority_model: "Human-Directed"
+  agent_state_shared: false
+  deterministic_execution_required: true
+
+# ---------------------------------------------------------
+# 4. Client Surfaces
+# ---------------------------------------------------------
+
+client_surfaces:
+  web:
+    type: "responsive"
+    supported_browsers:
+      - "Chrome"
+      - "Safari"
+      - "Edge"
+    minimum_browser_versions:
+      chrome: "latest-2"
+      safari: "latest-2"
+      edge: "latest-2"
+
+  mobile:
+    enabled: false
+    type: null  # native-ios | native-android | hybrid | pwa
+    casa_required: true
+    mrcp_required: true
+
+    platforms:
+      ios:
+        supported: false
+        minimum_version: null
+        target_version: null
+        store_distribution: false
+      android:
+        supported: false
+        minimum_version: null
+        target_version: null
+        store_distribution: false
+
+    device_classes_supported:
+      - "phone"
+
+    api_versioning:
+      versioned_endpoints_required: true
+      backward_compatibility_window_days: 180
+      breaking_change_requires_new_version: true
+      deprecation_notice_days: 90
+
+    release_policy:
+      planned_release_frequency: "monthly"
+      emergency_release_enabled: true
+      forced_upgrade_supported: false
+      minimum_supported_app_version_enforced: false
+
+    signing:
+      code_signing_required: false
+      signing_key_storage: null  # HSM | CI-Vault | Manual
+      key_rotation_policy_defined: false
+      reproducible_builds_required: false
+
+    telemetry:
+      crash_monitoring_enabled: false
+      crash_free_session_target_percent: null
+      version_adoption_tracking: false
+
+    offline_capability:
+      supported: false
+      local_storage_encrypted: false
+      data_reconciliation_strategy_defined: false
+
+# ---------------------------------------------------------
+# 5. API Governance
+# ---------------------------------------------------------
+
+api:
+  versioning_strategy: "semantic"
+  undocumented_endpoints_prohibited: true
+  client_pinning_required: true
+
+# ---------------------------------------------------------
+# 6. Security Controls
+# ---------------------------------------------------------
+
+security:
+  threat_model_version: "v1.0"
+  secure_sdlc_policy_version: "v1.0"
+  vulnerability_management_policy_version: "v1.0"
+  cryptographic_key_policy_version: "v1.0"
+
+# ---------------------------------------------------------
+# 7. Compliance & Data
+# ---------------------------------------------------------
+
+compliance:
+  data_retention_policy_version: "v1.0"
+  data_processing_register_version: "v1.0"
+  sub_processor_register_version: "v1.0"
+  vendor_risk_policy_version: "v1.0"
+
+# ---------------------------------------------------------
+# 8. Enforcement Flags
+# ---------------------------------------------------------
+
+enforcement:
+  architecture_changes_require_adr: true
+  mobile_release_block_if_no_mrcp: true
+  mobile_release_block_if_no_casa: true
+  block_if_rls_disabled_in_production: true
+  block_if_unversioned_api: true
+  block_if_signing_keys_unprotected: true
+
+# ---------------------------------------------------------
+# 9. Residual Risk Declaration
+# ---------------------------------------------------------
+
+residual_risk:
+  declared: false
+  statement: null
+  approved_by: null
