@@ -83,6 +83,7 @@ validators/
 - ADR_Template__v1.0.md
 - pull-request-template.md
 - AI-Assisted-Execution-Workflow__v1.0.md
+- Accessibility-Standard__WCAG2.2-AA__v1.0.md
 - README.md
 
 **Root Governance Artefacts:**
