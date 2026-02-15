@@ -14,6 +14,18 @@ Governance Doctrine
 **Supersedes:** Build-OS-Governance-Charter__v1.1  
 **Applies to:** All repositories governed by the AI-Native SaaS Build OS  
 
+
+---
+
+
+## Canonical Entry Point
+
+The repository root README.md and Master-Documentation-Index__vX.Y.md constitute the sole authoritative navigation entry point.
+
+All governance artefacts must be referenced within the Master Documentation Index.
+
+Unindexed artefacts are considered non-canonical.
+
 ---
 
 ## 1. Purpose
