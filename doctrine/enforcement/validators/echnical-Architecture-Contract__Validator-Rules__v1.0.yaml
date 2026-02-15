@@ -1,4 +1,4 @@
-# 2026-02-14__Technical-Architecture-Contract__Validator-Rules__v1.0.yaml
+# Technical-Architecture-Contract__Validator-Rules__v1.0.yaml
 # Machine-readable validator rules for Technical Architecture Contract (TAC).
 # Intended use: consumed by a lightweight validator script (Node/Python) in GitHub Actions.
 # Design goals: strict, deterministic, minimal ambiguity.
@@ -9,6 +9,7 @@ meta:
   owner: "ai-native-saas-build-os"
   severity_levels: ["INFO", "WARN", "ERROR"]
   default_severity: "ERROR"
+  applies_to_contract_version: ">=1.2"
 
 validation:
   mode: "strict"
