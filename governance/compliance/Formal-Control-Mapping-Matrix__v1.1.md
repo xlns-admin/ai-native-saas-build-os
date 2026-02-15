@@ -1,13 +1,13 @@
-# Formal-Control-Mapping-Matrix__v1.0.md
+# Formal-Control-Mapping-Matrix__v1.1.md
 AI-Native SaaS Build OS
 
 ---
 
-**Document:** Formal-Control-Mapping-Matrix__v1.0.md  
+**Document:** Formal-Control-Mapping-Matrix__v1.1.md  
 **Owner:** Security Lead  
 **Oversight:** Human Orchestrator  
 **Status:** Active  
-**Version:** v1.0  
+**Version:** v1.1  
 **Review Cycle:** Quarterly  
 **Classification:** Governance – Controlled  
 
@@ -85,6 +85,7 @@ No control may be marked “Implemented” without documented evidence.
 | CC2.1 | Risk Assessment | Threat Model, Tenant Policy Matrix | Preventative | Threat Model doc | Security Lead | Implemented |
 | CC3.2 | Logical Access Controls | Access-Control-Matrix | Preventative | IAM logs | Security Lead | Implemented |
 | CC4.1 | Change Management | Change-Management-Protocol | Preventative | Change register | Engineering Lead | Implemented |
+| CC4.2 | Code Change Traceability | AI-Assisted Execution Workflow + Evidence Bundles | Preventative | Prompt logs + PR links | Engineering Lead | Implemented |
 | CC5.1 | Monitoring Activities | Secure SDLC + Control Review Cadence | Detective | Audit logs | Security Lead | Implemented |
 | CC6.1 | Data Transmission Protection | Cryptographic-Key-Management-Policy | Preventative | TLS config evidence | Security Lead | Implemented |
 | CC7.2 | Vulnerability Management | Vulnerability-Management-Policy | Detective | Scan reports | Security Lead | Implemented |
@@ -145,6 +146,7 @@ No control may be marked “Implemented” without documented evidence.
 | A.8.12 | Data Leakage Prevention | Tenant-Isolation-Claim | Security Lead | Implemented |
 | A.8.15 | Logging | Incident-Response-Playbook + Monitoring Stack | Security Lead | Implemented |
 | A.8.23 | Web Filtering | Infrastructure Configuration | Infrastructure Lead | Implemented |
+| A.8.25 | Secure Development Lifecycle | AI-Assisted Execution Workflow | Infrastructure Lead | Implemented |
 
 ---
 
@@ -212,7 +214,7 @@ Control responsibility must be explicitly assigned.
 
 # 10. Version Control
 
-Version: v1.0  
+Version: v1.1  
 Review Cycle: Quarterly  
 Next Review: ____________________
 
