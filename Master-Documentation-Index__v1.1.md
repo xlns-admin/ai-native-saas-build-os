@@ -14,6 +14,18 @@ Authoritative Documentation Entry Point
 **Supersedes:** Master-Documentation-Index__v1.0  
 **Applies to:** ai-native-saas-build-os repository  
 
+
+---
+
+
+## Canonical Entry Point
+
+The repository root README.md and Master-Documentation-Index__vX.Y.md constitute the sole authoritative navigation entry point.
+
+All governance artefacts must be referenced within the Master Documentation Index.
+
+Unindexed artefacts are considered non-canonical.
+
 ---
 
 ## 1. Purpose
