@@ -1,17 +1,17 @@
-# Build-OS-Governance-Charter__v1.2
+# Build-OS-Governance-Charter__v1.3
 
 AI-Native SaaS Build OS  
 Governance Doctrine  
 
 ---
 
-**Document:** Build-OS-Governance-Charter__v1.2  
+**Document:** Build-OS-Governance-Charter__v1.3  
 **Owner:** Build OS Maintainer  
 **Status:** Approved  
-**Version:** v1.2  
+**Version:** v1.3  
 **Review Cycle:** Annual  
 **Classification:** Governance  
-**Supersedes:** Build-OS-Governance-Charter__v1.1  
+**Supersedes:** Build-OS-Governance-Charter__v1.2  
 **Applies to:** All repositories governed by the AI-Native SaaS Build OS  
 
 
@@ -299,6 +299,20 @@ Each Story must reference:
 - Diff Prompts used  
 
 Traceability is mandatory.
+
+## 7.4 AI-Assisted Execution Workflow Authority
+
+All AI-assisted execution must conform to the AI-Assisted Execution Workflow artefact.
+
+This workflow defines:
+- Canonical data models (Epic, Story, Diff Prompt, Run, Evidence Bundle, Manual Test Record)
+- Execution gating
+- Human approval boundaries
+- Evidence capture requirements
+
+No AI-generated code may bypass this workflow.
+
+Deviation requires formal ADR.
 
 ---
 
