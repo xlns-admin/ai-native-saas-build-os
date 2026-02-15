@@ -262,6 +262,3 @@ Discipline precedes speed.
 
 
 ⸻
-
-
-If you want next, we can formalise the Enforcement Layer Map visually so the OS becomes self-explanatory to new engineers and auditors in under 2 minutes.
