@@ -1,4 +1,4 @@
-# 2026-02-14__Contract-Validation__CI-Pattern__v1.0.md
+# Contract-Validation__CI-Pattern__v1.0.md
 
 ## Purpose
 
@@ -24,11 +24,11 @@ The gate must not:
 
 ### In the Build OS Repository
 - Validator rules:
-  - `enforcement/validators/2026-02-14__Technical-Architecture-Contract__Validator-Rules__v1.0.yaml`
+  - `enforcement/validators/Technical-Architecture-Contract__Validator-Rules__v1.0.yaml`
 - Validator spec:
-  - `enforcement/validators/2026-02-14__Technical-Architecture-Contract__Validator-Spec__v1.0.md`
+  - `enforcement/validators/Technical-Architecture-Contract__Validator-Spec__v1.0.md`
 - CI pattern (this document):
-  - `enforcement/ci/2026-02-14__Contract-Validation__CI-Pattern__v1.0.md`
+  - `enforcement/ci/Contract-Validation__CI-Pattern__v1.0.md`
 
 ### In a Product Repository
 Recommended:
