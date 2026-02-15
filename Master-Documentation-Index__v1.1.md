@@ -1,17 +1,17 @@
-# Master-Documentation-Index__v1.1
+# Master-Documentation-Index__v1.2
 
 AI-Native SaaS Build OS  
 Authoritative Documentation Entry Point  
 
 ---
 
-**Document:** Master-Documentation-Index__v1.1  
+**Document:** Master-Documentation-Index__v1.2  
 **Owner:** Build OS Maintainer  
 **Status:** Approved  
-**Version:** v1.1  
+**Version:** v1.2  
 **Review Cycle:** Quarterly  
 **Classification:** Governance  
-**Supersedes:** Master-Documentation-Index__v1.0  
+**Supersedes:** Master-Documentation-Index__v1.1  
 **Applies to:** ai-native-saas-build-os repository  
 
 
@@ -82,6 +82,7 @@ validators/
 - Governance-and-Control-Register__v1.0.md
 - ADR_Template__v1.0.md
 - pull-request-template.md
+- AI-Assisted-Execution-Workflow__v1.0.md
 - README.md
 
 **Root Governance Artefacts:**
