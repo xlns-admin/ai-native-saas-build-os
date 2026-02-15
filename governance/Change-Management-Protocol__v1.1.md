@@ -1,13 +1,13 @@
-# Change-Management-Protocol__v1.0.md
+# Change-Management-Protocol__v1.1.md
 AI-Native SaaS Build OS
 
 ---
 
-**Document:** Change-Management-Protocol__v1.0.md  
+**Document:** Change-Management-Protocol__v1.1.md  
 **Owner:** Engineering Lead  
 **Oversight:** Security Lead  
 **Status:** Active  
-**Version:** v1.0  
+**Version:** v1.1  
 **Review Cycle:** Quarterly  
 **Applies To:** All environments (Development, Staging, Production)  
 **Escalation Level:** Level 2 and above mandatory  
@@ -246,6 +246,19 @@ During implementation:
 
 Manual production changes are prohibited unless classified as Emergency.
 
+AI-Assisted Change Execution:
+
+Changes executed via AI must:
+
+- Be associated with a Story ID
+- Be traceable to a Diff Prompt ID
+- Generate an Evidence Bundle
+- Pass automated validation before merge
+
+Stacked prompt execution must not bypass review gates.
+
+Batch execution does not override classification discipline.
+
 ---
 
 ## 8. Validation Requirements
@@ -347,6 +360,7 @@ Date Approved:
 | Version | Date | Change | Author |
 |---------|------|--------|--------|
 | v1.0 | 2026-02-08 | Initial enterprise-grade change management protocol | System |
+| v1.1 | 2026-02-15 | Added AI-Assisted Change Execution to 7 | RM |
 
 ---
 
