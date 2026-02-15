@@ -1,12 +1,12 @@
-# Secure-SDLC-Policy__v1.0.md
+# Secure-SDLC-Policy__v1.1.md
 AI-Native SaaS Build OS
 
 ---
 
-**Document:** Secure-SDLC-Policy__v1.0.md  
+**Document:** Secure-SDLC-Policy__v1.1.md  
 **Owner:** Human Orchestrator  
 **Status:** Active  
-**Version:** v1.0  
+**Version:** v1.1  
 **Review Cycle:** Annual  
 **Classification:** Enterprise Security Governance  
 **Escalation Level:** Mandatory for Enterprise Hardening Level 2 and above  
@@ -207,6 +207,20 @@ Security-relevant terms defined once:
 
 ## Stage 7 — Implementation (AI-Assisted)
 
+**Execution Discipline Requirement:**
+
+All AI-assisted implementation must follow the AI-Assisted Execution Workflow.
+
+This requires:
+
+- Stories defined prior to prompt generation
+- Diff Prompts bounded to single reviewable change sets
+- Evidence Bundles captured automatically
+- Manual Test Record where required
+- CI and validator checks passing prior to completion
+
+AI-generated changes without Evidence Bundles are non-compliant and must not be merged.
+
 **Security Controls:**
 
 Code must comply with:
@@ -378,5 +392,6 @@ Date Approved:
 | Version | Date | Change | Author |
 |----------|------------|--------|--------|
 | v1.0 | 2026-02-08 | Initial Secure SDLC mapping integrated with AI-Native lifecycle | System |
+| v1.1 | 2026-02-15 | Added Execution Discipline Requirement (AI Assisted to Stage 7)| RM |
 
 ---
