@@ -24,6 +24,6 @@ jobs:
 
       - name: Run Contract Validator
         run: |
-          python enforcement/runtime/2026-02-14__Contract-Validator-Runtime__v1.0.py \
+          python enforcement/runtime/Contract-Validator-Runtime__v1.0.py \
             --contract path/to/contract.yaml \
-            --rules enforcement/validators/2026-02-14__Technical-Architecture-Contract__Validator-Rules__v1.0.yaml
+            --rules enforcement/validators/Technical-Architecture-Contract__Validator-Rules__v1.0.yaml
