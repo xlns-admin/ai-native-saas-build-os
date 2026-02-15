@@ -2,7 +2,20 @@
 
 Canonical doctrine and enforcement framework for AI-assisted SaaS product builds.
 
-This repository defines the mandatory lifecycle, governance artefacts, architectural contracts, and validation logic required for building compliant, auditable, and enterprise-grade AI-native systems.
+---
+
+## Canonical Entry Point
+
+All repository navigation begins here:
+
+➡️ /Master-Documentation-Index__v1.1.md
+
+The Master Documentation Index is the authoritative structural map of this repository.
+
+Any artefact not referenced within the Master Documentation Index is considered non-canonical.
+Canonical doctrine and enforcement framework for AI-assisted SaaS product builds.
+
+This repository defines the mandatory lifecycle, governance artefacts, architectural contracts, and validation logic required for building compliant, auditable, and enterprise-grade AI-native systems. This repository is designed to withstand enterprise audit and external procurement scrutiny.
 
 ---
 
@@ -18,18 +31,6 @@ This repository is the **source of truth** for:
 
 Product repositories inherit from this OS.
 They do not redefine it.
-
----
-
-## Repository Structure
-
-| Folder | Purpose |
-|--------|---------|
-| `/templates/` | Canonical artefact templates used by products |
-| `/contracts/` | Binding contract specifications |
-| `/enforcement/` | Validator rules, runtime, CI integration |
-| `/doctrine/` | Governance doctrine and lifecycle definitions |
-| `/changelog/` | Version history of the Build OS |
 
 ---
 
