@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-2026-02-14__Contract-Validator-Runtime__v1.0.py
+Contract-Validator-Runtime__v1.0.py
 
 Deterministic YAML contract validator.
 
