@@ -1,13 +1,13 @@
-# Governance-and-Control-Register__v1.0.md
+# Governance-and-Control-Register__v1.1.md
 AI-Native SaaS Build OS
 
 ---
 
-**Document:** Governance-and-Control-Register__v1.0.md  
+**Document:** Governance-and-Control-Register__v1.1.md  
 **Owner:** Architecture Lead  
 **Oversight:** Executive Sponsor  
 **Status:** Active  
-**Version:** v1.0  
+**Version:** v1.1  
 **Review Cycle:** Annual  
 **Classification:** Governance – Canonical Register  
 
@@ -63,6 +63,7 @@ No enterprise control artefact may exist outside this register.
 | Enterprise Hardening Layer | Defines escalation controls | Stage 0 | Annual | Executive Sponsor | 2 |
 | Escalation Matrix | Defines maturity progression | Stage 0 | Annual | Executive Sponsor | 2 |
 | Dual-Mode Architecture | Defines Core vs Enterprise path | Stage 1 | Annual | Architecture Lead | 2 |
+| AI-Assisted Execution Workflow | Defines bounded AI execution lifecycle & evidence model | Stage 6 | Quarterly | Architecture Lead | 2 |
 
 ---
 
@@ -105,5 +106,6 @@ Failure to update this register invalidates governance traceability.
 # Version History
 
 v1.0 — Initial governance spine for AI-Native SaaS Build OS.
+v1.1 — Added AI-Assisted Execution Workflow to Register.
 
 ---
