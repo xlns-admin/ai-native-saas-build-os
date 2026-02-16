@@ -23,7 +23,7 @@ This repository is **doctrine**.
 
 Primary integration guidance:
 - `PRODUCT_INTEGRATION_GUIDE.md`
-- `2026-02-13__Build-OS-Governance-Charter__v1.0.md`
+- `2026-02-13__Build-OS-Governance-Charter__v1.1.md`
 
 ---
 
@@ -134,7 +134,7 @@ These artefacts define the minimum enterprise control surface for security, priv
 
 ### 7.6 Control Mapping
 - `/compliance/2026-02-08__Formal-Control-Mapping-Matrix__v1.0.md`
-- `/compliance/2026-02-08__Governance-and-Control-Register__v1.0.md`
+- `/compliance/2026-02-08__Governance-and-Control-Register__v1.1.md`
 
 ---
 
